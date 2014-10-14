@@ -6,23 +6,30 @@
 	<meta name="viewport" content="width=device-width">
 	<title>Simple Switch</title>
 	<link rel="stylesheet" href="styles.css" type="text/css">
+
+    <script src="http://www.w3school.com.cn/jquery/jquery.js"></script>
 </head>
 <body class="bd">
 	<script type="text/javascript">document.body.className = "js";</script>
 	<h1>A Simple Switch</h1>
 	<h2>Power: <span id="status">OFF</span></h2>
-	<form action="/">
-		<label for="power">Power:</label>
-		<div class="switchwrap">
-			<div class="switch">
-			</div>
-			<input type="checkbox" id="power" />
-		</div>
-	</form>
+
+    <div class="form-wrap">
+        <form action="/">
+            <label for="power">Power:</label>
+
+            <div class="switchwrap">
+                <div class="switch">
+                </div>
+                <input type="checkbox" id="power"/>
+            </div>
+        </form>
+    </div>
 </body>
 <script type="text/javascript">
 	(function() {
-		
+        var $$ =jQuery.noConflict();
+
 		var TRANSITION_END = 'webkitTransitionEnd',
 			TRANSITION_CSS = '-webkit-transition',
 			TRANSFORM_CSS = '-webkit-transform',
@@ -41,6 +48,8 @@
 		var $ = function(selector) {
 			return document.querySelector(selector);
 		}
+
+
 		
 		var isOn = false;
 		
@@ -57,13 +66,14 @@
 		
 		var theSwitch = $('.switch');
 		
-		var l = $('form').offsetLeft;
+		var l = $('form').offsetLeft,
+            m =$$('form').offset().left;
 
 		var startLeft;
-		
+
 		function handleTouch(e) {
 
-			var goTo, endPoint;
+			var goTo , endPoint;
 			
 			switch(e.type) {
 				
@@ -72,7 +82,8 @@
 					break;
 				case 'touchmove':
 					goTo = (e.touches[0].pageX - l);
-					
+					console.log(e.touches[0].pageX)
+
 					if(goTo < 119 && goTo > 0) {
 						lastX = e.touches[0].pageX - l;
 						theSwitch.style.webkitTransform = 'translate3d(' + 
